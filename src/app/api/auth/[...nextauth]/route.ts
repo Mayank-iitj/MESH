@@ -4,7 +4,9 @@ import GoogleProvider from "next-auth/providers/google"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcrypt"
 
-const handler = NextAuth({
+import { NextAuthOptions } from "next-auth"
+
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -46,6 +48,8 @@ const handler = NextAuth({
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET || "your-super-secret-key-that-should-be-very-long",
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

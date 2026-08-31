@@ -1,12 +1,13 @@
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { User, Key, ShieldAlert, LogOut, CheckCircle2 } from "lucide-react"
 
 export default async function ProfilePage() {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   if (!session) {
     redirect('/login')
