@@ -96,13 +96,7 @@ MESH relies on **Prisma Composer** to construct an app graph containing modules,
 - **`module.ts`**: The root of the app that provisions databases, stream systems, and services.
 - **`src/app/actions/engine.ts`**: The heart of the platform. Evaluates policy (Check 1), assesses risk via an AI pipeline (Check 2), routes the payment (Check 3), and orchestrates sandbox settlement.
 - **`src/app/api/webhooks/stripe/route.ts`**: Manages real-time physical and virtual card swipes, rejecting them synchronously if they breach policy limits.
-
-## 📸 Platform Highlights
-
-<div align="center">
-  <img src="public/screenshots/1.png" alt="Dashboard View" width="800" style="border-radius: 8px; margin-bottom: 20px;" />
-</div>
-
+- 
 - **The Financial Control Plane**: Stunning dark mode aesthetics powered by `SpotlightCard`, `PixelBlast`, and `Strands` components.
 - **Real-Time Dashboards**: Visualize agent behavior, monitor transaction streams, and authorize edge-case transactions with 1-click approvals.
 
