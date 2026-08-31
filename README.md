@@ -1,37 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="public/logo.png" alt="MESH Logo" width="120" height="120" style="filter: invert(1);" />
+  
+  # MESH
+  
+  **The Financial Control Plane for Autonomous AI Agents**
 
-## Getting Started
+  [![Next.js](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![Prisma Composer](https://img.shields.io/badge/Prisma-Composer-5A67D8?style=for-the-badge&logo=prisma)](https://prisma.io/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](#license)
 
-First, run the development server:
+  <p align="center">
+    Millisecond routing. Zero compliance breaches. Programmable control at routing speed.
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌌 Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Human oversight is the bottleneck for autonomous commerce. MESH is the infrastructure required to deliver programmatic financial control at routing speed for AI agents. 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+With MESH, your agents can transact autonomously, evaluate risk instantly, and settle securely before wait times become friction. At 5,000 transactions per second, each policy evaluation cycle drops from hours of human review to less than 50 milliseconds.
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+- 🛡️ **Policy Engine:** Define organizational risk thresholds, budget limits, and compliance checks in natural language. MESH converts policies into high-speed executable binaries that process rules directly in memory.
+- ⚡ **Payment Router:** Automatically routes approved transactions through the optimal payment rails (Stripe, Lightning, USDC) based on cost, speed, and geographic requirements.
+- 🔒 **Zero Friction & Human-in-the-Loop:** No manual reviews for 99% of transactions. Exceptions are automatically flagged and routed to human financial controllers with full context and audit trails.
+- 🔑 **Developer API Keys:** Connect and authenticate your external local agents into the MESH platform securely with our high-end Developer Settings panel.
+- 🌐 **Provider Marketplace:** Real-time evaluation of provider risk scores and autonomous routing to compliant vendors.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework:** Next.js 16.3 (Turbopack)
+- **Architecture:** Prisma Composer (`@prisma/composer`)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + Custom React Bits Animated Components
+- **Payments:** Stripe (Fiat), Lightning Network (Crypto)
+- **Database:** Prisma ORM with PostgreSQL
 
-## Deploy on Vercel
+## 🛠️ Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Prerequisites
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# MESH
+- Node.js (v18 or higher)
+- npm or pnpm or yarn
+- PostgreSQL Database (if not using Prisma Composer's cloud instances)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Mayank-iitj/MESH.git
+   cd MESH
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory and add your keys:
+   ```env
+   # Stripe Configuration
+   STRIPE_SECRET_KEY=sk_test_...
+
+   # Database URL
+   DATABASE_URL=postgresql://user:password@localhost:5432/mesh
+   ```
+
+4. **Run Database Migrations:**
+   ```bash
+   npm run prisma:generate
+   npm run prisma:push
+   ```
+
+5. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   *For Prisma Composer local dev, you can also run:*
+   ```bash
+   npx prisma-composer dev module.ts
+   ```
+
+6. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the application.
+
+## 🏗️ Architecture Design
+
+MESH relies on **Prisma Composer** to construct an app graph containing modules, services, and event streams. 
+- **`module.ts`**: The root of the app that provisions databases, stream systems, and services.
+- **`src/app/actions/engine.ts`**: The heart of the platform. Evaluates policy (Check 1), assesses risk via an AI pipeline (Check 2), routes the payment (Check 3), and orchestrates sandbox settlement.
+- **`src/app/api/webhooks/stripe/route.ts`**: Manages real-time physical and virtual card swipes, rejecting them synchronously if they breach policy limits.
+
+## 📸 Platform Highlights
+
+<div align="center">
+  <img src="public/screenshots/1.png" alt="Dashboard View" width="800" style="border-radius: 8px; margin-bottom: 20px;" />
+</div>
+
+- **The Financial Control Plane**: Stunning dark mode aesthetics powered by `SpotlightCard`, `PixelBlast`, and `Strands` components.
+- **Real-Time Dashboards**: Visualize agent behavior, monitor transaction streams, and authorize edge-case transactions with 1-click approvals.
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+<div align="center">
+  Built with ❤️ by Mayank and the MESH Team.
+</div>
