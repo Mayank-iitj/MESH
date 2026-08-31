@@ -117,3 +117,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <div align="center">
   Built with ❤️ by Mayank and the MESH Team.
 </div>
+2026-08-31 14:13:38.681 [error] Error [PrismaClientInitializationError]: 
+Invalid `prisma.agent.findFirst()` invocation:
+
+
+error: Error validating datasource `db`: the URL must start with the protocol `postgresql://` or `postgres://`.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at <unknown> (-->  schema.prisma:10)
+    at async y (.next/server/chunks/ssr/src_1ee1csj._.js:1:2365) {
+  clientVersion: '5.22.0',
+  errorCode: undefined,
+  digest: '2766634785'
+}
