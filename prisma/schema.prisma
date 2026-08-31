@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String?
+  createdAt    DateTime @default(now())
+  agents       Agent[]
+  apiKeys      ApiKey[]
+}
+
+model Agent {
+  id         String   @id @default(cuid())
+  userId     String
+  name       String
+  purpose    String
+  status     String   @default("ACTIVE") // ACTIVE, PAUSED, FROZEN
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  wallet     Wallet?
+  policy     Policy?
+  transactions Transaction[]
+  tasks      AgentTask[]
+}
+
+model Wallet {
+  id               String   @id @default(cuid())
+  agentId          String   @unique
+  currency         String   @default("INR")
+  balance          Float    @default(0)
+  availableBalance Float    @default(0)
+  agent            Agent    @relation(fields: [agentId], references: [id])
+}
+
+model Policy {
+  id                 String   @id @default(cuid())
+  agentId            String   @unique
+  dailyLimit         Float
+  weeklyLimit        Float
+  monthlyLimit       Float
+  transactionLimit   Float
+  riskThreshold      Int
+  approvalThreshold  Float
+  allowedCategories  String   // JSON string or comma separated
+  allowedMerchants   String?  // JSON string
+  blockedMerchants   String?  // JSON string
+  allowedRails       String   // JSON string e.g. ["UPI", "LIGHTNING"]
+  active             Boolean  @default(true)
+  agent              Agent    @relation(fields: [agentId], references: [id])
+}
+
+model Provider {
+  id               String   @id @default(cuid())
+  name             String
+  category         String
+  price            Float
+  currency         String   @default("INR")
+  riskScore        Int
+  verified         Boolean  @default(false)
+  upiEnabled       Boolean  @default(true)
+  lightningEnabled Boolean  @default(false)
+  rating           Float
+  availability     Float
+  transactions     Transaction[]
+}
+
+model Transaction {
+  id               String   @id @default(cuid())
+  agentId          String
+  providerId       String
+  amount           Float
+  currency         String   @default("INR")
+  category         String
+  rail             String
+  riskScore        Int
+  policyDecision   String   // ALLOW, BLOCK, APPROVAL_REQUIRED
+  status           String   // PENDING, COMPLETED, FAILED, BLOCKED
+  approvalRequired Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  completedAt      DateTime?
+  agent            Agent    @relation(fields: [agentId], references: [id])
+  provider         Provider @relation(fields: [providerId], references: [id])
+  approval         Approval?
+  auditEvents      AuditEvent[]
+}
+
+model AgentTask {
+  id          String   @id @default(cuid())
+  agentId     String
+  description String
+  status      String   // PENDING, IN_PROGRESS, COMPLETED, FAILED
+  result      String?
+  createdAt   DateTime @default(now())
+  completedAt DateTime?
+  agent       Agent    @relation(fields: [agentId], references: [id])
+}
+
+model Approval {
+  id             String      @id @default(cuid())
+  transactionId  String      @unique
+  status         String      // PENDING, APPROVED, REJECTED
+  approvedBy     String?
+  createdAt      DateTime    @default(now())
+  transaction    Transaction @relation(fields: [transactionId], references: [id])
+}
+
+model AuditEvent {
+  id            String      @id @default(cuid())
+  transactionId String
+  type          String
+  message       String
+  metadata      String?     // JSON string
+  createdAt     DateTime    @default(now())
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  userId    String
+  name      String
+  createdAt DateTime @default(now())
+  lastUsed  DateTime?
+  user      User     @relation(fields: [userId], references: [id])
+}
