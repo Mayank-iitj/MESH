@@ -107,8 +107,9 @@ Provide your desired task as a JSON object with exactly these fields:
 
       console.log(`⚡ Dispatching to MESH Policy Engine API...`)
         
-        // We'll use the localhost checkout API
-        const apiResponse = await fetch("http://localhost:3000/api/v1/checkout", {
+        // We'll use the Vercel checkout API or fallback to env var
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://meshcontrolplane.vercel.app"
+        const apiResponse = await fetch(`${apiUrl}/api/v1/checkout`, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${apiKeyRecord.key}`,

@@ -3,7 +3,7 @@ import json
 import time
 
 # Configuration
-MESH_URL = "http://localhost:3000/api/transact"
+MESH_URL = "https://meshcontrolplane.vercel.app/api/transact"
 # Replace with a real Agent ID from your database
 AGENT_ID = "YOUR_AGENT_ID_HERE"
 
