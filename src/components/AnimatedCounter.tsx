@@ -35,7 +35,7 @@ export default function AnimatedCounter({
   }, [value, prefix, suffix])
 
   return (
-    <span ref={nodeRef} className={className}>
+    <span ref={nodeRef} className={className} suppressHydrationWarning>
       {prefix}{value.toLocaleString()}{suffix}
     </span>
   )

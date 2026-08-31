@@ -195,7 +195,7 @@ export default async function Dashboard() {
                     <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/20 flex flex-col gap-3">
                       <div className="flex items-center justify-between">
                         <Badge variant="outline" className="text-amber-500 border-amber-500/30">Action Required</Badge>
-                        <span className="text-xs text-muted-foreground">{formatDistanceToNow(tx.createdAt, { addSuffix: true })}</span>
+                        <span className="text-xs text-muted-foreground" suppressHydrationWarning>{formatDistanceToNow(tx.createdAt, { addSuffix: true })}</span>
                       </div>
                       <div>
                         <p className="text-sm font-medium">{tx.agent.name} wants to pay ₹{tx.amount} to {tx.provider.name}</p>
